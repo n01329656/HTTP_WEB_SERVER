@@ -8,5 +8,5 @@ Acceptor servers for accepting new connections next spawns a new instance of ser
 Server class provides simple interface: Start(),Stop(). Start() methods require port number which it is going to listen to for new connections, 
 and Stop() method makes all the worker threads complete remaining tasks and exit.
 
-##References:
+References:
 Radchuk,D.,(2016) Boost.Asio C++ Network Programming Coockbook.PACKT PUBLISHING
