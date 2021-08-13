@@ -121,6 +121,6 @@ void Client::Session::finish() {
 	if (m_sock.is_open()) {
 		m_sock.cancel();
 	}
-	delete this;		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!memory leak i guess...
+	delete this; 
 }
 	
