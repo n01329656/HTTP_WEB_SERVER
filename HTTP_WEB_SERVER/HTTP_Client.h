@@ -26,7 +26,7 @@ struct Session {
 private:
 	unsigned int m_port;
 	std::string m_IPaddress; 
-	std::string m_resource;
+	const std::string m_resource;
 	std::atomic<bool>m_canceled;
 	boost::asio::ip::tcp::endpoint m_ep;
 	boost::asio::ip::tcp::socket m_sock;
@@ -36,7 +36,8 @@ private:
 public:
 	Session(unsigned int port,const std::string& ip,const std::string& res, boost::asio::io_service& s);
 	void Start();
+	void SendRequest(const boost::system::error_code& er);
 	void RequestSent(const boost::system::error_code& er,std::size_t bytes);
-	void ResponseRecieved(const boost::system::error_code& er, std::size_t bytes);
+	void ResponseReceived(const boost::system::error_code& er, std::size_t bytes);
 	void Cancel();
 };

@@ -39,10 +39,32 @@ Session::Session(unsigned int port, const std::string& ip,const std::string& res
 	m_sock(s),
 	m_buffer()
 {
-	m_sock.open(m_ep.protocol());
-
+	m_sock.open(m_ep.protocol()); // bear in mind that it throws an exception: must catch it...
 }
 
 void Session::Start() {
-
+	if (m_canceled.load()==true) {
+		finish();
+		return;
+	}
+	m_sock.async_connect(m_ep,std::bind(&Session::SendRequest,this,std::placeholders::_1));
 }
+
+void Session::SendRequest(const boost::system::error_code& er){
+	
+	if (er.value() != 0) {
+		std::cout << er.message();
+		finish();
+		return;
+	}
+	if (m_canceled.load() == true) {
+		finish();
+		return;
+	}
+	
+	boost::asio::async_write(m_sock,boost::asio::buffer(m_resource,m_resource.length()),std::bind(&Session::RequestSent,this,std::placeholders::_1,std::placeholders::_2));
+}
+
+
+
+
