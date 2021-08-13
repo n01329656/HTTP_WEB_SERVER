@@ -92,7 +92,7 @@ using namespace boost;
 				std::getline(request_stream,header_value,'\r');
 				// Remove symbol \n from the stream.
 				request_stream.get();
-				m_request_headers[header_name] =header_value;
+				m_request_headers[header_name] = header_value;
 			}
 		}
 		// Now we have all we need to process the request.

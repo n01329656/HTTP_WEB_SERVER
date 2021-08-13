@@ -21,9 +21,15 @@
     <ClCompile Include="HTTP_Server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HTTP_Client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HTTP_Server.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HTTP_Client.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

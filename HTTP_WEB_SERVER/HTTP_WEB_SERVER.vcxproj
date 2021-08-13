@@ -147,10 +147,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="HTTP_Client.cpp" />
     <ClCompile Include="HTTP_Server.cpp" />
     <ClCompile Include="HTTP_WEB_SERVER.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HTTP_Client.h" />
     <ClInclude Include="HTTP_Server.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
