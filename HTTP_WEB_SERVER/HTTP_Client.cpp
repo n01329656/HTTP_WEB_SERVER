@@ -94,7 +94,11 @@ void Client::Session::RequestSent(const boost::system::error_code& er, std::size
 
 void Client::Session::ResponseReceived(const boost::system::error_code& er,std::size_t bytes) {
 	
-	if (er.value() != 0 && m_buffer.size()==0 ) {
+	// I think it is not the best way to check that all the data has been received and no error occurred
+	// when the server aborts the connection client gets an error code with value 2 which means that the connection has been aborted
+	// and here is an additional condition that checks if the buffer is not empty means that the server has sent all the data and just aborted connection the way it is supposed to be
+	// However, I think it is not the best way to do it but for now ok
+	if (m_buffer.size()==0 && er.value() != 0) {
 		std::cout <<"An error occured: " <<er.value()<<" " << er.message()<<"\n";
 		finish();
 		return;
@@ -121,6 +125,6 @@ void Client::Session::finish() {
 	if (m_sock.is_open()) {
 		m_sock.cancel();
 	}
-	delete this;		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!memory leak i guess...
+	delete this;	// making the object commit suicide. I think it is fine since after calling to finish() it is not used anywhere
 }
 	
